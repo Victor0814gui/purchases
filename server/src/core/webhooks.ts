@@ -1,58 +1,10 @@
-import "cors";
-import express from "express";
-import { stripe } from "./configs/stripe";
-import { PurchaseSubscriptionUseCase } from "./use-cases/purchase-subscription-use-case";
-import { PurchaseSubscriptionController } from "./controllers/create-subscription-controller";
-import { CreateProductController } from "./controllers/create-product-controller";
-import { ListProductsController } from "./controllers/list-products-controller";
-import { ListCustomerSubscriptionsController } from "./controllers/list-customer-subscriptions-controller";
-import { CreateCustomerController } from "./controllers/create-customer-use-case";
-import { ListProductsUseCase } from "./use-cases/list-products-use-case";
-import { CreateProductUseCase } from "./use-cases/create-product-use-case";
-import { ListCustomerSubscriptionsUseCase } from "./use-cases/list-customer-subscriptions-use-case";
-import { CreateCustomerUseCase } from "./use-cases/create-customer-use-case";
+import { Router } from "express";
+import { stripe } from "../configs/stripe";
 
-const PORT = process.env.PORT || 5000;
-const app = express();
-app.use(express.json());
+export const webhooks = Router();
 
-
-const purchaseSubscriptionUseCase = new PurchaseSubscriptionUseCase()
-const createProductUseCase = new CreateProductUseCase();
-const listProductsUseCase = new ListProductsUseCase();
-const listCustomerSubscriptionsUseCase = new ListCustomerSubscriptionsUseCase();
-const createCustomerUseCase = new CreateCustomerUseCase();
-
-const purchaseSubscriptionController = new PurchaseSubscriptionController(purchaseSubscriptionUseCase)
-const createProductController = new CreateProductController(createProductUseCase);
-const listProductsController = new ListProductsController(listProductsUseCase);
-const listCustomerSubscriptionsController = new ListCustomerSubscriptionsController(listCustomerSubscriptionsUseCase);
-const createCustomerController = new CreateCustomerController(createCustomerUseCase);
-
-
-app.post('/create-customer',  async (request,response) => {
-  await createCustomerController.handler(request,response)
-});
-
-app.post("/create-subscription",  async (request,response) => {
-  await purchaseSubscriptionController.handler(request,response)
-});
-
-app.post("/create-product",  async (request,response) => {
-  await createProductController.handler(request,response)
-});
-
-app.get("/products-list", async (request,response) => {
-  await listProductsController.handler(request,response)
-});
-
-app.get('/subscriptions', async (request,response) => {
-  await listCustomerSubscriptionsController.handler(request,response)
-});
-
-
-app.post(
-  '/webhook',
+webhooks.post(
+  '/webhooks',
   async (req, res) => {
     // Retrieve the event by verifying the signature using the raw body and secret.
     let event;
@@ -135,8 +87,3 @@ app.post(
     res.sendStatus(200);
   }
 );
-
-
-app.listen(PORT, () => {
-  console.log(`✅Server is runing on http://localhost:${PORT}`)
-})
