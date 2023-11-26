@@ -8,6 +8,8 @@ import {
   listProductsController,
   cancelSubscriptionController,
 } from "../factories";
+import { purchaseProductController } from "../factories/purchase-product-factory";
+import { stripe } from "../configs/stripe";
 
 export const routes = Router();
 
@@ -28,6 +30,10 @@ routes.get("/products-list", async (request, response) => {
   await listProductsController.handler(request, response)
 });
 
+routes.post("/purchase-product", async (request, response) => {
+  await purchaseProductController.handler(request, response)
+});
+
 routes.get('/subscriptions', async (request, response) => {
   await listCustomerSubscriptionsController.handler(request, response)
 });
@@ -35,3 +41,11 @@ routes.get('/subscriptions', async (request, response) => {
 routes.delete("/cancel-subscription", async (request, response) => {
   await cancelSubscriptionController.handler(request, response);
 })
+
+routes.get('/config', async (req, res) => {
+
+
+  return res.json({
+    client_secret: `${process.env.STRIPE_PUBLIC_KEY}`,
+  });
+});

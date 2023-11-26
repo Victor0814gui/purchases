@@ -13,10 +13,9 @@ export class PurchaseProductController {
   ) { }
   async handler(request: Request, response: Response): Promise<Response> {
 
-    const body = request.body as IRequest;
-
+    // const body = request.body as IRequest;
     const purchaseProductUseCaseResponse =
-      await this.purchaseProductUseCase.execute(body)
+      await this.purchaseProductUseCase.execute()
 
     return response.json(purchaseProductUseCaseResponse);
   }

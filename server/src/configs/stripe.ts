@@ -2,11 +2,11 @@ import Stripe from "stripe";
 
 
 export const stripe = new Stripe(
-  "sk_test_51NpF68Gx9zfdiazs2jYIgXmeLneVQM0YhVDYS3Td7NYIzfivWupL23VVLpdGWcIdJvR2ESwCfVEgWN5uF5c1MfUh00PHuF7T97",
+  `${process.env.STRIPE_SECRET_KEY}` as string,
   {
     apiVersion: "2023-10-16",
     appInfo: {
-      name: "purchases",
+      name: "test",
       version: "1.0.0",
     },
   }

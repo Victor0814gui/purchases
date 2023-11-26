@@ -1,0 +1,6 @@
+
+
+
+type ICancelSubscriptionContracts = {
+  subscriptionId: string;
+}
