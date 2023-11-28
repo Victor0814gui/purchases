@@ -2,19 +2,6 @@
   --secondary: #fa8100;
 }
 
-.container{
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
-}
-
-.listProducts{
-  display: grid;
-  grid-template-columns: repeat(3, 300px); /* Cria três colunas de largura igual */
-  gap: 20px; /* Espaço entre as colunas */
-}
-
 .product{
   padding: 21px;
   border: 1px solid black;
@@ -55,6 +42,11 @@
   position: absolute;
   right: -5px;
   top: calc(50% - 10px);
+}
+
+.subscription header span{
+  background-color: var(--secondary);
+  padding: 4px 12px;
 }
 
 .thumbnail{

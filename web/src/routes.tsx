@@ -8,6 +8,7 @@ import { Elements } from '@stripe/react-stripe-js'
 import { Stripe, loadStripe } from '@stripe/stripe-js'
 import { useEffect, useState } from 'react'
 import { api } from './service/api.ts'
+import { CreateProductPage } from './pages/create-product-page/index.tsx'
 
 type PublishableKey = {
   client_secret: string;
@@ -49,6 +50,7 @@ export function UserRoutes() {
         <Route path='/checkout' element={<CheckoutPage />} />
         <Route path='/success' element={<SuccessPage />} />
         <Route path='/me' element={<CreateCustomerPage />} />
+        <Route path='/create-product' element={<CreateProductPage />} />
       </Routes>
     </BrowserRouter>
   )

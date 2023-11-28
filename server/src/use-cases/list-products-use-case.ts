@@ -1,17 +1,18 @@
-import Stripe from "stripe";
-import { stripe } from "../configs/stripe";
+import { Product } from "@prisma/client";
+import { ListProductsRepository } from "../repositories/list-products-repository";
 
 
 
-type IResponse = Stripe.ApiList<Stripe.Product>
+type IResponse = Product[]
 
 
 export class ListProductsUseCase {
+  constructor(
+    private listProductsRepository: ListProductsRepository
+  ) { }
   async execute(): Promise<IResponse> {
-    const products = await stripe.products.list({
-      limit: 10,
-    });
-
-    return products
+    const listProductsResponse =
+      await this.listProductsRepository.list();
+    return listProductsResponse
   }
 }

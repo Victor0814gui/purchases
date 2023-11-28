@@ -1,0 +1,28 @@
+:root{
+  --secondary: #fa8100;
+}
+
+.container{
+  height: 70px;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav{
+  display: flex;
+  gap: 21px;
+}
+
+.nav p{
+  font-size: 18px;
+}
+
+.nav p span{
+  padding: 2px 12px;
+  border-radius: 16px;
+  margin-left: 3px;
+  background-color: var(--secondary);
+}

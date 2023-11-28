@@ -1,6 +1,0 @@
-
-
-
-type ICreateCustomerContracts = {
-  email: string;
-}

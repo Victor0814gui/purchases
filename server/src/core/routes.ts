@@ -10,6 +10,7 @@ import {
 } from "../factories";
 import { purchaseProductController } from "../factories/purchase-product-factory";
 import { stripe } from "../configs/stripe";
+import { syncProductsWithGatewayController } from "../factories/sync-products-with-gateway-factory";
 
 export const routes = Router();
 
@@ -26,7 +27,7 @@ routes.post("/create-product", async (request, response) => {
   await createProductController.handler(request, response)
 });
 
-routes.get("/products-list", async (request, response) => {
+routes.get("/list-products", async (request, response) => {
   await listProductsController.handler(request, response)
 });
 
@@ -42,9 +43,11 @@ routes.delete("/cancel-subscription", async (request, response) => {
   await cancelSubscriptionController.handler(request, response);
 })
 
+routes.post("/sync-product", async (request, response) => {
+  await syncProductsWithGatewayController.handler(request, response);
+})
+
 routes.get('/config', async (req, res) => {
-
-
   return res.json({
     client_secret: `${process.env.STRIPE_PUBLIC_KEY}`,
   });

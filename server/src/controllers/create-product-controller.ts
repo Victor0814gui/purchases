@@ -8,6 +8,7 @@ import { CreateProductUseCase } from "../use-cases/create-product-use-case";
 type IRequest = {
   name: string;
   amount: number;
+  description: string;
 }
 
 export class CreateProductController {
